@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>v-for实例</title>
+	<meta charset="utf-8">
+	<meta name="viewport"content="width=device-width,initial-scale=1" >
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+  <h1>v-for</h1>
+  <div id="app">
+      <!--正常循环-->
+    <ul>
+        <li v-for="index in array1">
+            {{index}}
+        </li>     
+    </ul>
+    <!--循环排序的-->
+    <ul>
+        <li v-for='item in array1_sort'>
+            {{item}}
+        </li>
+    </ul>
+
+    <ul>
+        <li v-for="(student,index) in array2_sort"> 
+            {{index+1}} {{student.name}} 
+            {{student.age}}
+        </li>
+    </ul>
+  </div>
+
+  <script type="text/javascript">
+  	var app = new Vue({
+  		el:"#app",
+  		data:{
+              array1:[10,34,5,3,44,45],
+              sutdent:[
+                  {name:'lisi',age:23},
+                  {name:'wangwu',age:15},
+                  {name:'xiaoer',age:18},
+                  {name:'wanger',age:11}
+                  ]
+          },
+          computed:{
+              array1_sort:function(){
+             return this.array1.sort(sortNum)
+          },
+          array2_sort:function(){
+              return this.sutdent.sort(sortNum)
+          }
+          }
+  	})
+        function sortNum(a,b){
+              return a-b;
+          }
+  </script>
+</body>
+</html>
