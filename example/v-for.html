@@ -11,14 +11,14 @@
   <div id="app">
       <!--正常循环-->
     <ul>
-        <li v-for="index in array1">
-            {{index}}
+        <li v-for="(key,index) in array1">
+            {{key}}
         </li>     
     </ul>
     <!--循环排序的-->
     <ul>
-        <li v-for='item in array1_sort'>
-            {{item}}
+        <li v-for='(key,index) in array1_sort'>
+            {{key}}
         </li>
     </ul>
 
@@ -40,20 +40,33 @@
                   {name:'wangwu',age:15},
                   {name:'xiaoer',age:18},
                   {name:'wanger',age:11}
-                  ]
+                  ],
+                  
           },
           computed:{
+              array2:function(){
+                     return this.array1.slice(0);//深复制
+                     //return this.array1.concat();//两种方法都可
+                  },
               array1_sort:function(){
-             return this.array1.sort(sortNum)
+             return this.array2.sort(sortNum)
           },
           array2_sort:function(){
-              return this.sutdent.sort(sortNum)
+              return this.sutdent.sort(sortByKey("age"))
           }
           }
   	})
         function sortNum(a,b){
               return a-b;
           }
+          function sortByKey(key){
+              return function(a,b){
+                   var x = a[key];
+                   var y = b[key];
+                   return (x>y?1:(x<y?-1:0));
+              }
+          }
+        
   </script>
 </body>
 </html>
