@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>v-on实例</title>
+	<meta charset="utf-8">
+	<meta name="viewport"content="width=device-width,initial-scale=1" >
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+  <h1>v-on实例</h1>
+  <div id="app">
+  本场得分：<span>{{score}}</span><br>
+  <button @click="get_score">加分</button>
+  <button @click="lose_score">减分</button><br>
+  <input type="text" @keyup.13='onEnter' placeholder="按回车加上输入的数" v-model="secondCount">
+  <input type="text" @keyup.32='down_score' placeholder="按空格减去输入的数" v-model="thirdCound">
+  </div>
+
+  <script type="text/javascript">
+  	var app = new Vue({
+  		el:"#app",
+  		data:{
+              score:0
+          },
+
+          methods:{
+              get_score:function(){
+                  this.score++;     
+              },
+              lose_score:function(){
+                  this.score--;
+              },
+              onEnter:function(){
+                  this.score = this.score +parseInt(this.secondCount);
+              },
+              down_score:function(){
+            this.score = this.score - parseInt(this.thirdCound);
+              }
+          }
+  	})
+  </script>
+</body>
+</html>
