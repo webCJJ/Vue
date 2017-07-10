@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>hello world</title>
+	<meta charset="utf-8">
+	<meta name="viewport"content="width=device-width,initial-scale=1" >
+	<script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+  <h1>Hello World</h1>
+  <div id="app">
+		<!--多选框绑定数组-->
+  <input type="checkbox" id="one" value="one" v-model="pick">
+  <label for="one">一</label><br>
+	<input type="checkbox" id="two" value="two" v-model="pick">
+  <label for="two">二</label>
+     <span>{{pick}}</span><br>
+		 <!--单选框绑定单个-->
+	<input type="radio" id="one" value="one" v-model="only">
+  <label for="one">一</label><br>
+	<input type="radio" id="two" value="two" v-model="only">
+  <label for="two">二</label><br>
+     <span>{{only}}</span>
+  </div>
+
+  <script type="text/javascript">
+  	var app = new Vue({
+  		el:"#app",
+  		data:{
+              message:true,
+							pick:[],
+							only:'',
+          }
+  	})
+  </script>
+</body>
+</html>
