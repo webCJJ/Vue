@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Vue.directive</title>
+    <title>Vue.directive自定义指令</title>
 </head>
 <body>
     <div id="app">
@@ -18,13 +18,18 @@
     <script src="../assets/js/vue.js"></script>
     <script>
         Vue.directive("cjj",function(el,binding,vnode){
-            el.style = "color :"+binding.value;
+            el.style.color = binding.value.color;
+            el.style.fontSize = binding.value.fontSize;
         })
         var app = new Vue({
             el:"#app",
             data:{
                 num : 10,
-                color:'green'
+                color:{
+                    text:"hi",
+                    color:"red",
+                    fontSize:"20px"
+                }
             },
             methods:{
                 add:function(){
