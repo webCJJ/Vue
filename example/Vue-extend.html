@@ -11,7 +11,16 @@
   </div>
 
   <script>
-    var vm = new Vue
+    var vm = Vue.extend({
+        template:'<p>{{cute}}</p>',
+        data:function(){
+            return{
+            cute:"傻滴很"
+            }
+        }
+    })
+      new vm().$mount('spp');
+      
   </script>
 </body>
 </html>
