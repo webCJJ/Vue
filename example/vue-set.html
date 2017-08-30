@@ -7,5 +7,47 @@
 </head>
 <body>
 
+   <cjj></cjj>
+   <div id="app">
+        <ul>
+            <li v-for=" aa in arr">{{aa}}</li>
+        </ul>
+   </div>
+   <button onclick="add()">外部添加</button>
+<script>
+    //1.调用外部数据
+    var setData = {
+        data1 : 1,
+        data2 : function(){
+            console.log(this.data1);
+        }
+    }
+    var cjj = Vue.extend({
+        template : "<span>{{num}}</span>",
+        data : function(){
+            setData.data2();//调用外部数据
+           return {
+               num : setData.data1,
+           }
+        }
+    })
+    new cjj().$mount('cjj');
+
+//2.在外部改变数据arr 数组的数据
+    //三种方法分别是Vue.set  outData.arr  app.arr
+    //界面是不会自动跟新数组的我们需要用Vue.set(app.arr,1,’ddd’)
+    // 来设置改变，vue才会给我们自动更新
+    var outData = {
+        arr:["aaa",'bbb','ccc']
+    }
+    var app = new Vue({
+        el:"#app",
+        data:outData
+    });
+    function add(){
+        app.arr[1] = 'ddd'; // 不即时执行
+        Vue.set(outData.arr,1,'dd') //即时执行
+    }
+</script>
 </body>
 </html>
