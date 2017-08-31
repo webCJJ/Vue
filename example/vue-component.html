@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>component 组件的注册</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <cjj></cjj>
+</div>
+
+<div id="app2">
+    <spp></spp>
+</div>
+<script>
+    //全局注册组件
+
+    Vue.component('cjj',{
+        template:'<h2 style="">全局化注册的cjj标签</h2>'
+    })
+    var app = new Vue({
+        el:'#app',
+        data:{}
+    })
+
+    //局部注册组件  局部使用
+    var vm = new Vue({
+        el:'#app2',
+        components : {
+            spp:{
+                template:'<h3 style="color: green;">spp</h3>'
+            }
+        }
+    })
+</script>
+</body>
+</html>
