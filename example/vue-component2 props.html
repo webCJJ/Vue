@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Component 组件props 属性设置</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+         <panda here="China"></panda>
+    </div>
+
+    <div id="app2">
+        <cjj v-bind:spp="msg"></cjj>
+    </div>
+<script>
+    //props 定义属性并获取属性值
+    var vm = new Vue({
+        el:"#app",
+        components:{
+            "panda":{
+                template:'<div>Panda from {{here}}</div>',
+                props:['here']
+            }
+        }
+    })
+    //在构造器里向组件中传值
+    var app2 = new Vue({
+        el : '#app2',
+        data:{
+            msg:"傻"
+        },
+        components:{
+            cjj : {
+                template:'<div>宋盼盼{{spp}}</div>',
+                props:['spp']
+            }
+        }
+    })
+</script>
+</body>
+</html>

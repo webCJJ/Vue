@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>component3</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+<p id="app">
+<spp ></spp>
+</p>
+<script>
+    var cjj ={
+        template : '<div>spp is cjj 滴</div>'
+    }
+    var spp = {
+        template: '<div>是的' +
+        '<cjj></cjj>' +
+        '</div>',
+        components:{
+            cjj:cjj
+        }
+    }
+    var vm = new Vue({
+        el:'#app',
+        data:{},
+        components :{
+                spp:spp
+            }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>component标签</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+<span id="app">
+    <component v-bind:is="who"></component>
+    <button @click="changeComponent">changeComponent</button>
+</span>
+
+<script>
+    var componentA = {
+        template : '<div>complateA</div>'
+    }
+    var componentB = {
+        template : '<div>complateB</div>'
+    }
+    var componentC = {
+        template : '<div>complateC</div>'
+    }
+   var vm = new Vue({
+       el : '#app',
+       data:{
+           who : 'componentA'
+       },
+       components:{
+           componentA:componentA,
+           componentB:componentB,
+           componentC:componentC
+       },
+       methods:{
+           changeComponent:function(){
+               if(this.who=='componentA'){
+                   this.who ="componentB";
+                   console.log(this.who);
+               }
+               if(this.who=='componentB'){
+                   this.who ="componentC";
+                   console.log(this.who);
+               }
+               if(this.who=='componentC'){
+                   this.who ="componentA";
+                   console.log(this.who);
+               }
+
+           }
+       }
+   })
+</script>
+</body>
+</html>
