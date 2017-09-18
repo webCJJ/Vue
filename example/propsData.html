@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>propsData 了解即可 全局扩展的数据传递</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+<p></p>
+<script>
+ var com = Vue.extend({
+     props:['msg'],
+     template:'<p>{{msg}}</p>',
+
+ })
+    var vm = new com({
+        propsData:{
+            msg:'hello'
+        }
+    })
+console.log(vm.msg);
+ //两种方法输出结果 都需要实例化构造器
+ //1.构造函数 实例化输出
+ //new com({propsData:{msg:'hello'}}).$mount('p');
+ //2.原文直接实例化 直接挂载
+  vm.$mount('p');
+
+</script>
+</body>
+</html>

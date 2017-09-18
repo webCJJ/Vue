@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Vue与JQuery结合使用</title>
+</head>
+<body>
+
+<div id="app">
+    {{message}}
+</div>
+<script src="../assets/js/vue.js"></script>
+<script src="../assets/js/jquery.min.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message:'hello cjj'
+        },
+        mounted:function(){
+            $("#app").html("使用了jQuery");
+            document.getElementById("app").innerHTML="使用原生js开发";
+        }
+    })
+    console.log(app);
+</script>
+
+</body>
+</html>

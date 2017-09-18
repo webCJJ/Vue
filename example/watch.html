@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>watch 监控数据</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>今日温度{{tep}}°C</p>
+        <p>穿衣建议：{{cloth}}</p>
+        <button @click="add()">加温</button>
+        <button @click="low()">减温</button>
+    </div>
+<script>
+     var clothes = ['棉衣','夹克','短袖'];
+     var vm = new Vue({
+         el:'#app',
+         data:{
+             tep:14,
+             cloth : clothes[1],
+         },
+         methods:{
+             add:function(){
+                 return this.tep = this.tep+5;
+             },
+             low:function(){
+                 return this.tep = this.tep-5;
+             }
+         }
+     })
+    vm.$watch('tep',function(newVal){
+        if(newVal>=26){
+            this.cloth = clothes[2];
+        }
+        else if(newVal<26 && newVal >=0){
+            this.cloth = clothes[1];
+        }
+        else{
+            this.cloth = clothes[0];
+        }
+    })
+</script>
+</body>
+</html>
