@@ -1,0 +1,97 @@
+body{
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+    font-size: 16px;
+}
+.wrapper{
+    width:100%;
+    margin: 0 auto;
+    min-width: 980px;
+    overflow: hidden;
+}
+.wrapper .left,.wrapper .right{
+    float: left;
+}
+.wrapper .left{
+    width:20%;
+    height:28em;
+    border:1px solid #ccc;
+}
+.wrapper .right{
+    width: 79.55%;
+    border: 1px solid #ccc;
+    /*margin-left: 1em;*/
+}
+.tab-wrapper,.tab,ul{
+    margin:0;
+    padding:0;
+}
+.tab-wrapper li{
+    list-style: none;
+}
+.tab-father .tab-text,.tab-child>li{
+    width:100%;
+    padding-left: 3.22em;
+    line-height:2em;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.tab-father .tab-text{
+    background-color: #f6f6f6;
+    height: 2.5em;
+    line-height: 2.5em;
+}
+.tab-child>li:hover{
+    background-color: beige;
+}
+.congig-wrapper{
+    width: 100%;
+    text-align: center;
+}
+.congig-wrapper>div{
+    margin-top: 2em;
+}
+.congig-wrapper select{
+    width: 19em;
+    height: 2.5em;
+}
+.login-btn button{
+    width: 6em;
+    height: 2em;
+    margin-bottom:2em;
+}
+.show-keyboard{
+    width:100%;
+}
+.username{
+    width: 19em;
+    height: 2.5em;
+}
+.security-inputBox {
+    height: 2.5em;
+    width: 18em;
+    line-height: 40px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: #999;
+    font-size: 14px;
+    margin: 2em auto;
+
+}
+
+#submitBtn {
+    display: block;
+    height: 2.5em;
+    width: 16em;
+    line-height:  2.5em;
+    border-radius: 5px;
+    background: #146bd4;
+    font-size: 16px;
+    color: #fff;
+    outline: none;
+    border: 0px none;
+    margin: 2em auto;
+}

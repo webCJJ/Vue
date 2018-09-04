@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试配置页</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/pc.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="left">
+            <div class="menu-wrapper">
+                <div class="tab-wrapper">
+                   <ul class="tab">
+                       <li class="tab-father">
+                           <div class="tab-text">
+                               H5密码控件
+                           </div>
+                           <ul class="tab-child">
+                               <li>登录</li>
+                               <li>支付</li>
+                               <li>修改密码</li>
+                               <li>注册</li>
+                               </li>
+                           </ul>
+                       </li>
+                   </ul>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="congig-wrapper">
+                <div class="mode">
+                    <span></span>
+                    <select name="" id="mode">
+                        <option value="pc">PC</option>
+                        <option value="mobile">Mobile</option>
+                    </select>
+                </div>
+                <div class="env">
+                    <select name="" id="env">
+                        <option value="46">46</option>
+                        <option value="test">回归环境</option>
+                        <option value="pre">准生产</option>
+                        <option value="prod">生产</option>
+                    </select>
+                </div>
+                <div class="login-btn">
+                    <button id="loginBtn">确认</button>
+                </div>
+
+                <div class="show-keyboard">
+                    <input type="text" placeholder="请输入用户名" class="username">
+                    <div class="security-inputBox security-key" id="loginKey" data-name="password" data-val="" data-holder="登录密码"
+                         data-lgh="100">登录密码
+                    </div>
+                    <input type="button" id="submitBtn" value="提交"/>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--<script type="text/javascript" src="js/RSA/RSA.js"></script>-->
+    <!--<script type="text/javascript" src="js/RSA/BigInt.js"></script>-->
+    <!--<script type="text/javascript" src="js/RSA/Barrett.js"></script>-->
+    <!--<script type="text/javascript" src="js/AES/crypto-js.js"></script>-->
+    <!--<script type="text/javascript" src="js/mainJS/common.js"></script>-->
+    <script>
+        WfontSize()
+        window.onresize = function(){
+            WfontSize()
+        }
+        function WfontSize(){
+            var clientWidth = document.documentElement.clientWidth;
+            var bodyFontSize = document.getElementsByTagName("body")[0];
+            bodyFontSize.style.fontSize = clientWidth*18/1366 + "px";
+        }
+
+        var loginBtn = document.getElementById("loginBtn");
+        var mode = document.getElementById("mode");
+        var env = document.getElementById("env");
+        var interface = document.getElementById('interface');
+
+        loginBtn.onclick = function(){
+            var modeVal = mode.value;
+            var envVal = env.value;
+            var interfaceVal = interface.value;
+            if(modeVal == "pc" && envVal == "46" && interfaceVal =="login"){
+               console.log("pc 46 login")
+            }else if(modeVal == "pc" && envVal == "test" && interfaceVal =="login"){
+
+            }
+        }
+
+        var loginKey = document.querySelector('#loginKey');
+        var keyId = [loginKey];
+
+        // 46测试 ip
+        var ip = "http://mapi.test1.bestpay.net/mapi/";
+        var test = "http://172.17.46.52:8030/mapi" // 登录的
+
+        wrapper.init({obj: keyId, servlet: ""+ip+"seccore/generateKeyInfo", servletIE:""+ip+"get/seccore/generateKeyInfo",servletGetIE:""+test+"/get/auth",appID:"baitiao",servletKey:""+test+"/auth",ifCursor: "yes"});
+
+        var btn = document.getElementById("submitBtn");
+        btn.onclick = function(){
+            subBtn(servletJson)
+        }
+
+        function subBtn(servletJson) {
+            var publicClass = wrapper.public();// 获取第二个接口提交的相关参数 encodeVal为全报文(密码，设备指纹等参数)
+            // keyIndex与enCodeIndex 为加密因子  encdataKey 加密秘钥
+            var encodeVal = wrapper.getPwdPara(publicClass._this,servletJson); //获取输入框数据加密结果
+            publicClass.aesKeytoString = wrapper.public().aesKeytoString;
+            if (publicClass.isIE8 || publicClass.isIE9) {  // 当浏览器是IE8 或 IE9的话发送jsonp请求
+                var url = publicClass.servletGetIE + "?encData=" + encodeVal  + "&" + "keyIndex=" + publicClass.sessionId + "&" + "encdataKey=" + publicClass.aesKeytoString +"&" + "callback=" + 'callback';
+                // 调用jsonp 函数
+                publicClass.jsonp(url, function (data) {
+                    if (data.success == true) {
+                        alert("成功");
+
+                    } else {
+                        alert(data.errorMsg);
+                    }
+                })
+            }
+            else {
+                publicClass.ajax(publicClass.servletKey, {"encData" : encodeVal,"keyIndex" : publicClass.sessionId ,"encdataKey" : publicClass.aesKeytoString}, function (data) {
+                    var response;
+                    if (!!window.ActiveXObject || "ActiveXObject" in window) {
+                        response = JSON.parse(data.responseText);
+                    } else {
+                        response = (data.response);
+                    }
+                    if (response.success == true){  // 成功可进行的操作
+                        alert("成功");
+                    } else {
+                        alert(response.errorMsg);
+                    }
+                })
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>
