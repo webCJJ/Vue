@@ -64,11 +64,7 @@
 
 
     </div>
-    <!--<script type="text/javascript" src="js/RSA/RSA.js"></script>-->
-    <!--<script type="text/javascript" src="js/RSA/BigInt.js"></script>-->
-    <!--<script type="text/javascript" src="js/RSA/Barrett.js"></script>-->
-    <!--<script type="text/javascript" src="js/AES/crypto-js.js"></script>-->
-    <!--<script type="text/javascript" src="js/mainJS/common.js"></script>-->
+ 
     <script>
         WfontSize()
         window.onresize = function(){
@@ -96,54 +92,7 @@
             }
         }
 
-        var loginKey = document.querySelector('#loginKey');
-        var keyId = [loginKey];
-
-        // 46测试 ip
-        var ip = "http://mapi.test1.bestpay.net/mapi/";
-        var test = "http://172.17.46.52:8030/mapi" // 登录的
-
-        wrapper.init({obj: keyId, servlet: ""+ip+"seccore/generateKeyInfo", servletIE:""+ip+"get/seccore/generateKeyInfo",servletGetIE:""+test+"/get/auth",appID:"baitiao",servletKey:""+test+"/auth",ifCursor: "yes"});
-
-        var btn = document.getElementById("submitBtn");
-        btn.onclick = function(){
-            subBtn(servletJson)
-        }
-
-        function subBtn(servletJson) {
-            var publicClass = wrapper.public();// 获取第二个接口提交的相关参数 encodeVal为全报文(密码，设备指纹等参数)
-            // keyIndex与enCodeIndex 为加密因子  encdataKey 加密秘钥
-            var encodeVal = wrapper.getPwdPara(publicClass._this,servletJson); //获取输入框数据加密结果
-            publicClass.aesKeytoString = wrapper.public().aesKeytoString;
-            if (publicClass.isIE8 || publicClass.isIE9) {  // 当浏览器是IE8 或 IE9的话发送jsonp请求
-                var url = publicClass.servletGetIE + "?encData=" + encodeVal  + "&" + "keyIndex=" + publicClass.sessionId + "&" + "encdataKey=" + publicClass.aesKeytoString +"&" + "callback=" + 'callback';
-                // 调用jsonp 函数
-                publicClass.jsonp(url, function (data) {
-                    if (data.success == true) {
-                        alert("成功");
-
-                    } else {
-                        alert(data.errorMsg);
-                    }
-                })
-            }
-            else {
-                publicClass.ajax(publicClass.servletKey, {"encData" : encodeVal,"keyIndex" : publicClass.sessionId ,"encdataKey" : publicClass.aesKeytoString}, function (data) {
-                    var response;
-                    if (!!window.ActiveXObject || "ActiveXObject" in window) {
-                        response = JSON.parse(data.responseText);
-                    } else {
-                        response = (data.response);
-                    }
-                    if (response.success == true){  // 成功可进行的操作
-                        alert("成功");
-                    } else {
-                        alert(response.errorMsg);
-                    }
-                })
-
-            }
-        }
+     
 
     </script>
 
